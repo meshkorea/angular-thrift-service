@@ -1,8 +1,8 @@
 (function (window, angular, Thrift, undefined) {
   'use strict';
 
-  angular.module('angular-thrift-service', [])
-    .service('thriftService', function ($q, $http) {
+  angular.module('ngThriftService', [])
+    .service('ngThriftService', function ($q, $http) {
       return {
         create: function (Client, url, timeout) {
           var transport = new Thrift.Transport('');
