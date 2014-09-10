@@ -1,0 +1,28 @@
+{
+  "name": "angular-thrift-service",
+  "version": "0.0.0",
+  "homepage": "https://github.com/meshkorea/angular-thrift-service",
+  "authors": [
+    "hyungsul.kim@meshkorea.net"
+  ],
+  "description": "An angular module that converts thrift services to angular services.",
+  "main": "src/angular-thrift-service.js",
+  "keywords": [
+    "angular",
+    "thrift"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "thrift": "~0.9.1",
+    "angular": "~1.2.24"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.24"
+  }
+}
