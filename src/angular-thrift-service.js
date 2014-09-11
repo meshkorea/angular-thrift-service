@@ -31,11 +31,21 @@
                 return client['recv_' + methodName].call(client);
               };
 
-              return $http.post(url, args, {
+              var deferred = $q.defer();
+
+              $http.post(url, args, {
                 transformRequest: thriftSend,
                 transformResponse: thriftRecv,
                 timeout: timeout,
-                tracker: methodName});
+                tracker: methodName})
+                .success(function (data) {
+                  deferred.resolve(data);
+                })
+                .error(function (data) {
+                  deferred.reject(data);
+                });
+
+              return deferred.promise;
             };
           });
 
