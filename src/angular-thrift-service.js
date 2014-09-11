@@ -21,6 +21,7 @@
           angular.forEach(methodNames, function (methodName) {
             service[methodName] = function () {
               var args = Array.prototype.slice.call(arguments, 0, arguments.length);
+              var deferred = $q.defer();
 
               var thriftSend = function (data) {
                 return client['send_' + methodName].apply(client, data);
@@ -28,21 +29,22 @@
 
               var thriftRecv = function (data) {
                 client.output.transport.setRecvBuffer(data);
-                return client['recv_' + methodName].call(client);
+                try {
+                  return client['recv_' + methodName].call(client);
+                } catch (e) {
+                  deferred.reject(e);
+                }
               };
-
-              var deferred = $q.defer();
 
               $http.post(url, args, {
                 transformRequest: thriftSend,
                 transformResponse: thriftRecv,
                 timeout: timeout,
                 tracker: methodName})
-                .success(function (data) {
-                  deferred.resolve(data);
-                })
-                .error(function (data) {
-                  deferred.reject(data);
+                .then(function (response) {
+                  deferred.resolve(response.data);
+                }, function (error) {
+                  deferred.reject(error);
                 });
 
               return deferred.promise;
