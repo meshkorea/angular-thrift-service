@@ -25,7 +25,7 @@
               var deferred = $q.defer();
 
               if(argumentMutator) {
-                args = argumentMutator(methodName, args);
+                args = argumentMutator(args, methodName);
               }
 
               var thriftSend = function (data) {
