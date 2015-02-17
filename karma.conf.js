@@ -4,8 +4,8 @@ module.exports = function (config) {
 
     files: [
       'bower_components/angular/angular.js',
-      'bower_components/angular-mock/angular-mock.js',
-      'bower_components/thrift/lib/js/thrift.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/thrift/lib/js/src/thrift.js',
       'src/*.js',
       'test/**/*.js'
     ],

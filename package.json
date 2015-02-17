@@ -1,6 +1,6 @@
 {
   "name": "angular-thrift-service",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "description": "An angular module that converts thrift services to angular services.",
   "repository": {
     "type": "git",

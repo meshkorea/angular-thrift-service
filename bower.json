@@ -1,6 +1,6 @@
 {
   "name": "angular-thrift-service",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/meshkorea/angular-thrift-service",
   "authors": [
     "hyungsul.kim@meshkorea.net"
@@ -19,10 +19,15 @@
     "test"
   ],
   "dependencies": {
-    "thrift": "~0.9.1",
+    "thrift": "~0.9.2",
     "angular": "~1.2.24"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.24"
+  },
+  "overrides": {
+    "thrift": {
+      "main": "lib/js/src/thrift.js"
+    }
   }
 }
