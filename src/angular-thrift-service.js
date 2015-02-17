@@ -21,10 +21,10 @@
 
           angular.forEach(methodNames, function (methodName) {
             service[methodName] = function () {
-              var args = arguments.slice(0);
+              var args = Array.prototype.slice(arguments, 0, arguments.length);
               var deferred = $q.defer();
 
-              if(argumentMutator) {
+              if (argumentMutator) {
                 args = argumentMutator(args, methodName);
               }
 
@@ -45,7 +45,8 @@
                 transformRequest: thriftSend,
                 transformResponse: thriftRecv,
                 timeout: timeout,
-                tracker: methodName})
+                tracker: methodName
+              })
                 .then(function (response) {
                   deferred.resolve(response.data);
                 }, function (error) {
