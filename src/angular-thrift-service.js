@@ -4,11 +4,12 @@
   angular.module('ngThriftService', [])
     .service('ngThriftService', function ($q, $http) {
       return {
-        create: function (Client, url, timeout) {
+        create: function (Client, url, timeout, argumentMutator) {
           var transport = new Thrift.Transport('');
           var protocol = new Thrift.Protocol(transport);
           var client = new Client(protocol);
           timeout = timeout || 30000;
+          argumentMutator = argumentMutator || false;
 
           var service = {};
           var methodNames = [];
@@ -20,8 +21,12 @@
 
           angular.forEach(methodNames, function (methodName) {
             service[methodName] = function () {
-              var args = Array.prototype.slice.call(arguments, 0, arguments.length);
+              var args = arguments.slice(0);
               var deferred = $q.defer();
+
+              if(argumentMutator) {
+                args = argumentMutator(methodName, args);
+              }
 
               var thriftSend = function (data) {
                 return client['send_' + methodName].apply(client, data);
