@@ -21,7 +21,7 @@
 
           angular.forEach(methodNames, function (methodName) {
             service[methodName] = function () {
-              var args = Array.prototype.slice(arguments, 0, arguments.length);
+              var args = Array.prototype.slice.call(arguments, 0, arguments.length);
               var deferred = $q.defer();
 
               if (argumentMutator) {
